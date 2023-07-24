@@ -1,0 +1,29 @@
+{%extends "layout.html"%}
+
+{%block title%}
+Quote
+{%endblock%}
+{%block main%}
+<form action="/quote" method="post">
+    <div class="mb-3"><input class="form-control mx-auto w-auto" type="text" autofocus placeholder="stock name"
+            name="stock_name"></div>
+    <button type="submit" class="btn btn-primary">search</button>
+</form>
+
+    <table style="display:inline-block;margin:0 auto;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        {%if method == "POST"%}
+        <tbody>
+            <tr>
+                <td>{{stock["name"]}}</td>
+                <td>{{stock["price"]}}</td>
+            </tr>
+        </tbody>
+        {%endif%}
+    </table>
+{%endblock%}
