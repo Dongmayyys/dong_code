@@ -26,20 +26,20 @@ header {
     background-color: aqua;
 }
 
-.search {
+form>div {
     display: flex;
-}
-
-.search input {
-    display: flex;
-}
-
-.search div {
-    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30%;
 }
 
 input[type="text"] {
     border-radius: 10px;
+}
+
+input[type="submit"] {
+    display: block;
+    margin: 5px auto;
 }
 
 input {
