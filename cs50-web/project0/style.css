@@ -1,0 +1,60 @@
+/* #region header */
+header {
+    display: flex;
+    flex-flow: row wrap;
+    background-color: skyblue;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.redirect {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    color: black;
+}
+
+/* #endregion */
+
+/* #region main */
+.search-box {
+    background-color: aqua;
+}
+
+input[type="text"] {
+    border-radius: 10px;
+}
+
+
+
+.search {
+    display: flex;
+    flex-flow: column wrap;
+    margin-right: 10px;
+    align-items: center;
+}
+
+input {
+    margin: 5px 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+
+}
+
+.nav>a {
+    margin: 0 10px;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* #endregion */

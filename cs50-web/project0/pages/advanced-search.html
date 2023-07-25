@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>asv-search</title>
+    <link rel="stylesheet" href="../test.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Google</h1>
+      <div class="nav">
+        <a href="pages/img-search.html">img</a>
+        <a href="../index.html">index</a>
+      </div>
+    </header>
+    <main>
+      <div class="search-box">
+        <form
+          class="search"
+          action="https://www.google.com/search"
+          target="_blank"
+        >
+          <div>all these words:<input type="text" name="as_q" autofocus /></div>
+          <div>
+            this exact word or phrase:<input type="text" name="as_epq" />
+          </div>
+          <div>any of these words:<input type="text" name="as_oq" /></div>
+          <div>none of these words:<input type="text" name="as_eq" /></div>
+
+          <input type="submit" value="Google Search" />
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
