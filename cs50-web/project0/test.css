@@ -2,7 +2,7 @@
 header {
     display: flex;
     flex-flow: row wrap;
-    background-color: skyblue;
+    background-color: #ccc;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
@@ -23,7 +23,7 @@ header {
 
 /* #region main */
 .search-box {
-    background-color: aqua;
+    background-color: #ffffff;
 }
 
 form>div {
@@ -38,6 +38,8 @@ input[type="text"] {
 }
 
 input[type="submit"] {
+    background-color: blue;
+    color: #ffffff;
     display: block;
     margin: 5px auto;
 }
