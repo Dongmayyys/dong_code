@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import render, redirect
 from django.urls import reverse
-import markdown
+from markdown2 import markdown
 import random
 from . import util
 
@@ -40,11 +40,11 @@ def search(request):
 
 
 def entry(request, title):
-    content = util.get_entry(title)
+    content = util.get_entry(title.strip())
     if content:
         return render(request, "encyclopedia/entry.html", {
             "title": title,
-            "content": markdown.markdown(content)
+            "content": markdown(content)
         })
     else:
         return redirect(reverse("notfound"))
@@ -63,6 +63,7 @@ def create(request):
             else:
                 util.save_entry(data["title"], data["content"])
                 return redirect(reverse("entry", kwargs={"title": data["title"]}))
+        # 非法的情况下直接重新渲染表单页面即可，聪明的Django表单会自动显示错误提示
         else:
             return render(request, "encyclopedia/create.html", {
                 "form": form
@@ -89,7 +90,7 @@ def edit(request, title):
             return redirect(reverse("notfound"))
     # 正常获取编辑页面用get就行，因为这并不修改服务器，同样是获取内容，只是没有markdown->html而已
     else:
-        content = util.get_entry(title)
+        content = util.get_entry(title.strip())
         form = EditForm(initial={"content": content})
         return render(request, "encyclopedia/edit.html", {"form": form, "title": title})
 
@@ -97,7 +98,7 @@ def edit(request, title):
 def lucky(request):
     entries = util.list_entries()
     entry = random.choice(entries)
-    return redirect(reverse("entry", kwargs={"title": entry}))
+    return redirect("entry", title=entry)
 
 
 def notFound(request):
