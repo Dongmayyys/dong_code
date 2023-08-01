@@ -17,17 +17,26 @@ class EditForm(forms.Form):
 
 
 def index(request):
-    query = request.GET.get("q")
     entries = util.list_entries()
-    if query:
-        if query in entries:
-            return redirect(reverse("entry", kwargs={"title": query}))
-        else:
-            entries = [entry for entry in entries if query.lower()
-                       in entry.lower()]
     return render(request, "encyclopedia/index.html", {
         "entries": entries
     })
+
+
+def search(request):
+    query = request.GET.get("q").strip()
+    entries = util.list_entries()
+    if query:
+        if query in entries:
+            return redirect("entry", title=query)
+        else:
+            entries = [entry for entry in
+                       entries if query.lower()
+                       in entry.lower()]
+            return render(request, "encyclopedia/search.html", {
+                "query": query,
+                "entries": entries,
+            })
 
 
 def entry(request, title):
