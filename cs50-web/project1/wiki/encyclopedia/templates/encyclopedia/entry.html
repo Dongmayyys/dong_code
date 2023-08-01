@@ -6,9 +6,9 @@
 
 {% block body %}
 {{content|safe}}
-<form action="{% url 'entry' title=title %}" method="post">
+<form action="{% url 'edit' title %}" method="get">
     {% csrf_token %}
-    <input type="text" name="title" value="{{title}}" hidden>
+    <!-- <input type="text" name="title" value="{{title}}" hidden> title参数在标题都用过了,本就是从view.py传入到html怎么可能在这通过input得到title呢-->
     <button>Edit</button>
 </form>
 {% endblock %}

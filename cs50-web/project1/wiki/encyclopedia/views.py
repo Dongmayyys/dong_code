@@ -31,20 +31,14 @@ def index(request):
 
 
 def entry(request, title):
-    if request.method == "POST":
-        title = request.POST.get("title")
-        content = util.get_entry(title)
-        form = EditForm(initial={"content": content})
-        return render(request, "encyclopedia/edit.html", {"form": form, "title": title})
+    content = util.get_entry(title)
+    if content:
+        return render(request, "encyclopedia/entry.html", {
+            "title": title,
+            "content": markdown.markdown(content)
+        })
     else:
-        content = util.get_entry(title)
-        if content:
-            return render(request, "encyclopedia/entry.html", {
-                "title": title,
-                "content": markdown.markdown(content)
-            })
-        else:
-            return redirect(reverse("notfound"))
+        return redirect(reverse("notfound"))
 
 
 def create(request):
@@ -71,19 +65,24 @@ def create(request):
         })
 
 
-def edit(request):
+def edit(request, title):
+    # post是在编辑页面准备保存修改了,才用post，
     if request.method == "POST":
-        title = request.POST.get("title")
-        print(title)
+        # 我用Django表单是因为其自带合法性校验，省事
+        # 没有title字段是因为，编辑条目不该改变标题，否则保存的时候会生成新条目，而不是覆盖原条目
         form = EditForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             util.save_entry(title, data["content"])
             return redirect(reverse("entry", kwargs={"title": title}))
+        # 合法性校验失败
         else:
-            content = util.get_entry(title)
-            form = EditForm(initial={"content": content})
-            return render(request, "encyclopedia/edit.html", {"form": form})
+            return redirect(reverse("notfound"))
+    # 正常获取编辑页面用get就行，因为这并不修改服务器，同样是获取内容，只是没有markdown->html而已
+    else:
+        content = util.get_entry(title)
+        form = EditForm(initial={"content": content})
+        return render(request, "encyclopedia/edit.html", {"form": form, "title": title})
 
 
 def lucky(request):

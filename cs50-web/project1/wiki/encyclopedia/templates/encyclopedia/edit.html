@@ -5,10 +5,10 @@ Edit_{{title}}
 {% endblock %}
 
 {% block body %}
-<form action="{% url 'edit' %}" method="post">
+<form method="post">
     {% csrf_token %}
     {{form}}
-    <input type="text" name="title" value="{{title}}" hidden>
+    <!-- <input type="text" name="title" value="{{title}}" hidden> -->
     <button>Save</button>
 </form>
 {% endblock %}
